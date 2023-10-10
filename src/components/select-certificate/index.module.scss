@@ -1,0 +1,77 @@
+@import '../../styles/index.scss';
+
+.select {
+  box-sizing: border-box;
+  font-family: $system-fonts;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 400px;
+  width: 100%;
+  padding-left: 12px;
+  border: $border;
+  border-radius: $border-radius;
+  position: relative;
+  cursor: pointer;
+  background-color: $light-color;
+
+  &:hover {
+    .list {
+      transform: scaleY(1);
+    }
+
+    .arrow > .img {
+      fill: rgb(126, 126, 126);
+    }
+  }
+
+  .selected {
+    @include font(16px, 400, normal, 100%);
+    margin: 0;
+
+    &.default {
+      color: $placeholder;
+    }
+  }
+
+  .arrow {
+    width: 37px;
+    height: 36px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 20px;
+      width: 1px;
+      position: absolute;
+      left: 0;
+      top: calc(50% - 10px);
+      background-color: rgb(204, 204, 204);
+    }
+
+    .img {
+      fill: rgb(204, 204, 204);
+      transition: fill $animation-duration ease-in-out;
+    }
+  }
+
+  .list {
+    @extend %reset-list;
+    position: absolute;
+    top: calc(100% + 2px);
+    left: -2px;
+    width: 100%;
+    transform-origin: top center;
+    transform: scaleY(0);
+    transition: transform $animation-duration ease-in-out;
+    background-color: inherit;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+    border: $border;
+    border-top: 0;
+  }
+}
