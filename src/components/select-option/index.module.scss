@@ -1,0 +1,28 @@
+@import '../../styles/index.scss';
+
+.item {
+  font-family: $system-fonts;
+  transition: background-color $animation-duration ease-in-out,
+    color $animation-duration ease-in-out;
+
+  &:not(:last-of-type) {
+    border-bottom: 1px solid rgba($border-color, 0.7);
+  }
+
+  &:hover {
+    background-color: $border-color;
+    color: $light-color;
+  }
+
+  .label {
+    @include font(16px, 400, normal, 100%);
+    display: block;
+    padding: 9px 12px;
+    cursor: pointer;
+    user-select: none;
+
+    .radio {
+      display: none;
+    }
+  }
+}
