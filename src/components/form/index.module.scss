@@ -1,0 +1,26 @@
+@import '../../styles/index.scss';
+
+.form {
+  font-family: $system-fonts;
+  max-width: 400px;
+  width: 100%;
+  padding: 10px;
+  //background-color: $light-color;
+  border-radius: 10px;
+  background-color: rgba($purple-color, 0.9);
+
+  .fieldset {
+    @extend %reset-indent;
+    border: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    .legend {
+      @include font(20px, 500, normal, 120%);
+      text-align: center;
+      color: $light-color;
+    }
+  }
+}
