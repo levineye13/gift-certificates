@@ -1,0 +1,16 @@
+@import '../../styles/index.scss';
+
+.button {
+  @include font(16px, 500, normal, 130%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: $system-fonts;
+  color: $lilac-color;
+  border: $border;
+  background-color: $light-color;
+  padding: 10px 20px;
+  min-width: 150px;
+  border-radius: 10px;
+  cursor: pointer;
+}
