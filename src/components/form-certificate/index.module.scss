@@ -1,0 +1,23 @@
+@import '../../styles/index.scss';
+
+.link {
+  display: block;
+  font-family: $system-fonts;
+  color: $light-color;
+  outline: 0;
+  text-decoration: none;
+  border-bottom: 1px solid $light-color;
+  margin: 0 auto;
+  max-width: max-content;
+  transition: color $animation-duration ease-in-out,
+    border-color $animation-duration ease-in-out;
+
+  &:hover {
+    color: $link-color;
+    border-color: $link-color;
+  }
+}
+
+.field {
+  margin-top: 5px;
+}
