@@ -1,0 +1,11 @@
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &_select-certificate,
+  &_contacts {
+    flex-grow: 1;
+    margin: auto 0;
+  }
+}
