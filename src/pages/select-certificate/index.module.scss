@@ -1,0 +1,28 @@
+@import '../../styles/index.scss';
+
+.section {
+  font-family: $system-fonts;
+  max-height: 700px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 50px;
+
+    .price {
+      @include font(18px, 400, normal, 120%);
+      color: $dark-color;
+      margin: 0 0 10px 0;
+
+      .span {
+        font-weight: 700;
+      }
+    }
+  }
+}
