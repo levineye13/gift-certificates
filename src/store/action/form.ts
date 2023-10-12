@@ -1,7 +1,8 @@
-import { SET_FIELD, CLEAR_FORM } from '../action-types/form';
+import { TAppForms } from '../../utils/types';
+import { SET_FIELD, CLEAR_FORM, SET_ERROR } from '../action-types/form';
 
 interface IFormPayload {
-  form: string;
+  form: TAppForms;
   field: string;
   value: string | number;
 }
@@ -11,21 +12,43 @@ interface ISetField {
   readonly payload: IFormPayload;
 }
 
-interface IClearForm {
-  readonly type: typeof CLEAR_FORM;
+interface ISetError {
+  readonly type: typeof SET_ERROR;
   readonly payload: {
-    form: string;
+    form: TAppForms;
+    field: string;
+    error: string;
   };
 }
 
-export type TFormActions = ISetField | IClearForm;
+interface IClearForm {
+  readonly type: typeof CLEAR_FORM;
+  readonly payload: {
+    form: TAppForms;
+  };
+}
 
-export const setField = (payload: IFormPayload): ISetField => ({
+export type TFormActions = ISetField | ISetError | IClearForm;
+
+export const setField = ({ form, field, value }: IFormPayload): ISetField => ({
   type: SET_FIELD,
-  payload,
+  payload: { form, field, value },
 });
 
-export const clearForm = (payload: { form: string }): IClearForm => ({
+export const setError = ({
+  form,
+  field,
+  error,
+}: {
+  form: TAppForms;
+  field: string;
+  error: string;
+}): ISetError => ({
+  type: SET_ERROR,
+  payload: { form, field, error },
+});
+
+export const clearForm = ({ form }: { form: TAppForms }): IClearForm => ({
   type: CLEAR_FORM,
-  payload,
+  payload: { form },
 });

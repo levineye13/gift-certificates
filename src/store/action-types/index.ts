@@ -1,1 +1,1 @@
-export { SET_FIELD, CLEAR_FORM } from './form';
+export { SET_FIELD, SET_ERROR, CLEAR_FORM } from './form';

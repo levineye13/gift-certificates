@@ -1,15 +1,26 @@
-import { CLEAR_FORM, SET_FIELD } from '../action-types';
+import { TAppForms } from './../../utils/types';
+import { CLEAR_FORM, SET_ERROR, SET_FIELD } from '../action-types';
 import { TFormActions } from '../action/form';
 
-interface IFormState {
-  [form: string]: {
-    [field: string]: string | number;
+type TFormState = {
+  [form in TAppForms]: {
+    values: {
+      [field: string]: string | number;
+    };
+    errors: {
+      [field: string]: string;
+    };
   };
-}
+};
 
-const initialState: IFormState = {};
+const initialState: TFormState = {
+  formCertificate: { values: {}, errors: {} },
+};
 
-export const formReducer = (state = initialState, action: TFormActions) => {
+export const formReducer = (
+  state: TFormState = initialState,
+  action: TFormActions
+): TFormState => {
   const { type } = action;
 
   switch (type) {
@@ -20,7 +31,25 @@ export const formReducer = (state = initialState, action: TFormActions) => {
         ...state,
         [payload.form]: {
           ...state[payload.form],
-          [payload.field]: payload.value,
+          values: {
+            ...state[payload.form].values,
+            [payload.field]: payload.value,
+          },
+        },
+      };
+    }
+
+    case SET_ERROR: {
+      const { payload } = action;
+
+      return {
+        ...state,
+        [payload.form]: {
+          ...state[payload.form],
+          errors: {
+            ...state[payload.form].errors,
+            [payload.field]: payload.error,
+          },
         },
       };
     }
@@ -28,7 +57,10 @@ export const formReducer = (state = initialState, action: TFormActions) => {
     case CLEAR_FORM:
       return {
         ...state,
-        [action.payload.form]: {},
+        [action.payload.form]: {
+          values: {},
+          errors: {},
+        },
       };
 
     default:
