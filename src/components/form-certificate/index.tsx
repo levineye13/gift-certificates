@@ -1,44 +1,40 @@
 import React, { FC, ReactElement } from 'react';
-import { useMask } from '@react-input/mask';
 
 import Form from '../form';
 import Field from '../form-field';
+import FieldPhone from '../form-field-phone';
 import Area from '../form-area';
+import { useForm } from '../../hooks/useForm';
+import { appFormNames } from '../../utils/constants';
 import styles from './index.module.scss';
 
 const FormCertificate: FC = (): ReactElement => {
-  const inputRef = useMask({
-    mask: '+7 (___) ___-__-__',
-    replacement: { _: /\d/ },
-    showMask: true,
+  const { values, errors, onChange } = useForm({
+    formName: appFormNames.formCertificate,
   });
 
   return (
-    <Form name="form" title="Сертификат на 5000 руб">
+    <Form name="formCertificate" title="Сертификат на 5000 руб">
       <Field
         type="text"
         name="fio"
-        value=""
-        error=""
+        value={values.fio}
+        error={errors.fio}
         required
+        onChange={onChange}
         placeholder="Введите ФИО"
         className={styles.field}
         tabIndex={1}
       >
         ФИО
       </Field>
-      <Field
-        type="text"
-        name="tel"
-        value=""
-        error=""
-        required
+      <FieldPhone
+        value={values.tel}
+        error={errors.tel}
+        onChange={onChange}
         className={styles.field}
         tabIndex={2}
-        inputRef={inputRef}
-      >
-        Телефон
-      </Field>
+      />
       <Area
         name="message"
         value=""
@@ -52,9 +48,10 @@ const FormCertificate: FC = (): ReactElement => {
       <Field
         type="email"
         name="email"
-        value=""
-        error=""
+        value={values.email}
+        error={errors.email}
         required
+        onChange={onChange}
         placeholder="Введите почту"
         className={styles.field}
         tabIndex={4}
