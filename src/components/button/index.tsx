@@ -8,6 +8,7 @@ interface IButton {
   readonly name: string;
   readonly form?: string;
   readonly disabled?: boolean;
+  readonly className?: string;
 }
 
 const Button: FC<IButton> = ({
@@ -16,12 +17,13 @@ const Button: FC<IButton> = ({
   name,
   form,
   disabled,
+  className = '',
 }): ReactElement => {
   const handleClick = (e: MouseEvent<HTMLButtonElement>) => {};
 
   return (
     <button
-      className={styles.button}
+      className={`${styles.button} ${className}`}
       type={type}
       name={name}
       form={form}
