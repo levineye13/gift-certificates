@@ -12,6 +12,12 @@
     padding-left: 12px;
     margin-bottom: 5px;
     color: $light-color;
+
+    &_required::after {
+      content: '*';
+      display: inline-block;
+      margin-left: 3px;
+    }
   }
 
   .input {
