@@ -12,6 +12,7 @@ interface IField {
   readonly placeholder?: string;
   readonly required?: boolean;
   readonly tabIndex?: number;
+  readonly inputRef?: React.MutableRefObject<HTMLInputElement | null>;
 }
 
 const FormField: FC<IField> = ({
@@ -24,20 +25,24 @@ const FormField: FC<IField> = ({
   required,
   placeholder,
   tabIndex,
+  inputRef,
 }): ReactElement => {
   return (
     <label className={`${styles.label} ${className || ''}`}>
-      <p className={styles.par}>{children}</p>
+      <p className={`${styles.par} ${required ? styles.par_required : ''}`}>
+        {children}
+      </p>
       <input
         className={styles.input}
         type={type}
         value={value}
         name={name}
         required={required}
+        ref={inputRef}
         placeholder={placeholder}
         tabIndex={tabIndex}
       />
-			<span className={styles.error}>{error}</span>
+      <span className={styles.error}>{error}</span>
     </label>
   );
 };

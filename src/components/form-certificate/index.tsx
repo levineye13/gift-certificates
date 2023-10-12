@@ -1,4 +1,5 @@
 import React, { FC, ReactElement } from 'react';
+import { useMask } from '@react-input/mask';
 
 import Form from '../form';
 import Field from '../form-field';
@@ -6,6 +7,12 @@ import Area from '../form-area';
 import styles from './index.module.scss';
 
 const FormCertificate: FC = (): ReactElement => {
+  const inputRef = useMask({
+    mask: '+7 (___) ___-__-__',
+    replacement: { _: /\d/ },
+    showMask: true,
+  });
+
   return (
     <Form name="form" title="Сертификат на 5000 руб">
       <Field
@@ -13,6 +20,7 @@ const FormCertificate: FC = (): ReactElement => {
         name="fio"
         value=""
         error=""
+        required
         placeholder="Введите ФИО"
         className={styles.field}
         tabIndex={1}
@@ -20,12 +28,14 @@ const FormCertificate: FC = (): ReactElement => {
         ФИО
       </Field>
       <Field
-        type="tel"
+        type="text"
         name="tel"
         value=""
         error=""
+        required
         className={styles.field}
         tabIndex={2}
+        inputRef={inputRef}
       >
         Телефон
       </Field>
@@ -44,6 +54,7 @@ const FormCertificate: FC = (): ReactElement => {
         name="email"
         value=""
         error=""
+        required
         placeholder="Введите почту"
         className={styles.field}
         tabIndex={4}
