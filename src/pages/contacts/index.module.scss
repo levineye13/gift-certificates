@@ -1,0 +1,20 @@
+@import '../../styles/index.scss';
+
+.section {
+  font-family: $system-fonts;
+  max-height: 700px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+
+  .div {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &_button {
+    margin-left: 20px;
+  }
+}
