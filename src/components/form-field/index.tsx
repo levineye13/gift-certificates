@@ -5,14 +5,15 @@ import styles from './index.module.scss';
 interface IField {
   readonly children: string;
   readonly type: 'text' | 'tel' | 'email';
-  readonly value: string;
+  readonly value: string | number;
   readonly error: string;
   readonly name: string;
+  readonly onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   readonly className?: string;
   readonly placeholder?: string;
   readonly required?: boolean;
   readonly tabIndex?: number;
-  readonly inputRef?: React.MutableRefObject<HTMLInputElement | null>;
+  readonly inputRef?: React.RefObject<HTMLInputElement>;
 }
 
 const FormField: FC<IField> = ({
@@ -21,6 +22,7 @@ const FormField: FC<IField> = ({
   value,
   error,
   name,
+  onChange,
   className,
   required,
   placeholder,
@@ -38,6 +40,7 @@ const FormField: FC<IField> = ({
         value={value}
         name={name}
         required={required}
+        onChange={onChange}
         ref={inputRef}
         placeholder={placeholder}
         tabIndex={tabIndex}
