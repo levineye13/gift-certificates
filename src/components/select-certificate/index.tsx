@@ -1,36 +1,25 @@
-import React, { ChangeEvent, FC, ReactElement, useState } from 'react';
+import React, { ChangeEvent, FC, ReactElement } from 'react';
 
 import Option from '../select-option';
 import styles from './index.module.scss';
-
-const cert = [50000, 40000, 30000, 20000, 10000];
-const defaultData = { index: -1, content: '', default: 'Выберите товар' };
+import { useDispatch, useSelector } from '../../store/hooks';
+import { setSelectCertificate } from '../../store/action/certificate';
+import { ICertificate } from '../../utils/interfaces';
 
 const SelectCertificate: FC = (): ReactElement => {
-  const [select, setSelect] = useState(defaultData);
+  const dispatch = useDispatch();
+  const { list, current } = useSelector((state) => state.certificate);
 
   const handleChange =
-    (index: number) =>
+    (certificate: ICertificate) =>
     (e: ChangeEvent<HTMLInputElement>): void => {
-      setSelect({
-        default: defaultData.default,
-        index,
-        content: `Сертификат на ${cert[index]} руб`,
-      });
+      dispatch(setSelectCertificate(certificate));
     };
-
-  const handleClear = (): void => {
-    setSelect(defaultData);
-  };
 
   return (
     <div className={styles.select}>
-      <p
-        className={`${styles.selected} ${
-          select.index === -1 ? styles.default : ''
-        }`}
-      >
-        {select.content || select.default}
+      <p className={`${styles.selected} ${current ? '' : styles.default}`}>
+        {current?.name || 'Выберите товар'}
       </p>
       <div className={styles.arrow}>
         <svg
@@ -45,16 +34,17 @@ const SelectCertificate: FC = (): ReactElement => {
         </svg>
       </div>
       <ul className={styles.list}>
-        {cert.map((cert, index) => (
-          <Option
-            name="radio"
-            onChange={handleChange(index)}
-            checked={index === select.index}
-            key={index}
-          >
-            {`Сертификат на ${cert} руб`}
-          </Option>
-        ))}
+        {list.length > 0 &&
+          list.map((cert) => (
+            <Option
+              name="radio"
+              onChange={handleChange(cert)}
+              checked={cert.id === current?.id}
+              key={cert.id}
+            >
+              {cert.name}
+            </Option>
+          ))}
       </ul>
     </div>
   );
