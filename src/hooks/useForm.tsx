@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { useAppDispatch, useAppSelector } from '../store/hooks';
+import { useDispatch, useSelector } from '../store/hooks';
 import { setError, setField } from '../store/action';
 import { TAppForms } from '../utils/types';
 
 const useForm = ({ formName }: { formName: TAppForms }) => {
-  const dispatch = useAppDispatch();
-  const form = useAppSelector((state) => state.form[formName]);
+  const dispatch = useDispatch();
+  const form = useSelector((state) => state.form[formName]);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { currentTarget } = e;

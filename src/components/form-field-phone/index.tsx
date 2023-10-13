@@ -2,7 +2,7 @@ import React, { FC, ReactElement } from 'react';
 import { useMask } from '@react-input/mask';
 
 import Field from '../form-field';
-import { useAppDispatch } from '../../store/hooks';
+import { useDispatch } from '../../store/hooks';
 import { setError } from '../../store/action';
 import { appFormNames } from '../../utils/constants';
 
@@ -21,7 +21,7 @@ const FormFieldPhone: FC<IField> = ({
   className,
   tabIndex,
 }): ReactElement => {
-  const dispatch = useAppDispatch();
+  const dispatch = useDispatch();
   const inputRef = useMask({
     mask: '+7 (___) ___-__-__',
     replacement: { _: /\d/ },
