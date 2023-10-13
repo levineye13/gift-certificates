@@ -7,14 +7,41 @@ import Area from '../form-area';
 import { useForm } from '../../hooks/useForm';
 import { appFormNames } from '../../utils/constants';
 import styles from './index.module.scss';
+import { useDispatch, useSelector } from '../../store/hooks';
+import { saveCertificate } from '../../store/action/certificate';
 
 const FormCertificate: FC = (): ReactElement => {
+  const dispatch = useDispatch();
+  const { current } = useSelector((state) => state.certificate);
+
   const { values, errors, onChange } = useForm({
     formName: appFormNames.formCertificate,
   });
 
+  const handleSubmit = () => {
+    if (current) {
+      dispatch(
+        saveCertificate({
+          id: current.id,
+          tablename: current.tablename,
+          primarykey: current.primarykey,
+          price: current.price,
+          summa: current.summa,
+          clientname: values.fio,
+          phone: values.tel,
+          email: values.email,
+        })
+      );
+    }
+  };
+
   return (
-    <Form name="formCertificate" title="Сертификат на 5000 руб">
+    <Form
+      name={appFormNames.formCertificate}
+      title={current?.name || ''}
+      onSubmit={handleSubmit}
+      id={appFormNames.formCertificate}
+    >
       <Field
         type="text"
         name="fio"
