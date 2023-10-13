@@ -3,6 +3,7 @@ import React, { FC, ReactElement } from 'react';
 import FormCertificate from '../../components/form-certificate';
 import Button from '../../components/button';
 import styles from './index.module.scss';
+import { appFormNames } from '../../utils/constants';
 
 interface ISelectCertificate {
   readonly className?: string;
@@ -16,8 +17,13 @@ const Contacts: FC<ISelectCertificate> = ({ className = '' }): ReactElement => {
         <Button type="button" name="back">
           Назад
         </Button>
-        <Button type="button" name="payment" className={styles.section_button}>
-          Перейти к оплате
+        <Button
+          type="submit"
+          name="payment"
+          className={styles.section_button}
+          form={appFormNames.formCertificate}
+        >
+          Оплатить
         </Button>
       </div>
     </section>
