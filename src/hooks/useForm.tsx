@@ -10,7 +10,6 @@ const useForm = ({ formName }: { formName: TAppForms }) => {
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { currentTarget } = e;
-    console.log(currentTarget);
 
     if (form) {
       dispatch(

@@ -54,10 +54,7 @@ const FormFieldPhone: FC<IField> = ({
       value={value}
       error={error}
       required
-      onChange={(e) => {
-        console.log(inputRef);
-        onChange(e);
-      }}
+      onChange={onChange}
       className={className}
       tabIndex={tabIndex}
       inputRef={inputRef}
