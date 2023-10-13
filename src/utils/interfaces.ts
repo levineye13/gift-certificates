@@ -5,4 +5,5 @@ export interface ICertificate {
   summa: string;
   discount: string;
   tablename: string;
+  primarykey: string;
 }

@@ -59,3 +59,35 @@ export const fetchCertificates: TAppThunk =
       console.error(e);
     }
   };
+
+export const saveCertificate: TAppThunk =
+  ({
+    id,
+    tablename,
+    primarykey,
+    price,
+    summa,
+    clientname,
+    phone,
+    email,
+  }: ICertificate & { clientname: string; phone: string; email: string }) =>
+  async (dispatch: AppDispatch) => {
+    try {
+      const res = await api.saveCertificate({
+        id,
+        tablename,
+        primarykey,
+        price,
+        summa,
+        clientname,
+        phone,
+        email,
+      });
+
+      if (res && res.result === 0) {
+        console.log(res);
+      }
+    } catch (e) {
+      console.error(e);
+    }
+  };
