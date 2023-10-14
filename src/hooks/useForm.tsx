@@ -17,6 +17,7 @@ const useForm = ({ formName }: { formName: TAppForms }) => {
           form: formName,
           field: currentTarget.name,
           value: currentTarget.value,
+          isValid: currentTarget.checkValidity(),
         })
       );
 
@@ -40,10 +41,23 @@ const useForm = ({ formName }: { formName: TAppForms }) => {
     }
   };
 
+  const checkValidity = (): boolean => {
+    for (const key in form.values) {
+      const field = form.values[key];
+
+      if (!field.isValid) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
   return {
     values: form.values,
     errors: form.errors,
     onChange,
+    checkValidity,
   };
 };
 

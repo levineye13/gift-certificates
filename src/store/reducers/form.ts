@@ -5,7 +5,10 @@ import { TFormActions } from '../action/form';
 type TFormState = {
   [form in TAppForms]: {
     values: {
-      [field: string]: string | number;
+      [field: string]: {
+        isValid: boolean;
+        value: string | number;
+      };
     };
     errors: {
       [field: string]: string;
@@ -14,7 +17,10 @@ type TFormState = {
 };
 
 const initialState: TFormState = {
-  formCertificate: { values: {}, errors: {} },
+  formCertificate: {
+    values: {},
+    errors: {},
+  },
 };
 
 export const formReducer = (
@@ -33,7 +39,10 @@ export const formReducer = (
           ...state[payload.form],
           values: {
             ...state[payload.form].values,
-            [payload.field]: payload.value,
+            [payload.field]: {
+              isValid: payload.isValid,
+              value: payload.value,
+            },
           },
         },
       };

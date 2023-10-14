@@ -5,6 +5,7 @@ interface IFormPayload {
   form: TAppForms;
   field: string;
   value: string | number;
+  isValid: boolean;
 }
 
 interface ISetField {
@@ -30,9 +31,14 @@ interface IClearForm {
 
 export type TFormActions = ISetField | ISetError | IClearForm;
 
-export const setField = ({ form, field, value }: IFormPayload): ISetField => ({
+export const setField = ({
+  form,
+  field,
+  value,
+  isValid,
+}: IFormPayload): ISetField => ({
   type: SET_FIELD,
-  payload: { form, field, value },
+  payload: { form, field, value, isValid },
 });
 
 export const setError = ({

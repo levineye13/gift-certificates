@@ -14,12 +14,14 @@ const FormCertificate: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const { current } = useSelector((state) => state.certificate);
 
-  const { values, errors, onChange } = useForm({
+  const { values, errors, onChange, checkValidity } = useForm({
     formName: appFormNames.formCertificate,
   });
 
   const handleSubmit = () => {
-    if (current) {
+    const isValid = checkValidity();
+
+    if (current && isValid) {
       dispatch(
         saveCertificate({
           id: current.id,
@@ -27,9 +29,9 @@ const FormCertificate: FC = (): ReactElement => {
           primarykey: current.primarykey,
           price: current.price,
           summa: current.summa,
-          clientname: values.fio,
-          phone: values.tel,
-          email: values.email,
+          clientname: values.fio.value,
+          phone: values.tel.value,
+          email: values.email.value,
         })
       );
     }
@@ -45,7 +47,7 @@ const FormCertificate: FC = (): ReactElement => {
       <Field
         type="text"
         name="fio"
-        value={values.fio}
+        value={values.fio?.value || ''}
         error={errors.fio}
         required
         onChange={onChange}
@@ -56,9 +58,9 @@ const FormCertificate: FC = (): ReactElement => {
         ФИО
       </Field>
       <FieldPhone
-        value={values.tel}
+        value={values.tel?.value || ''}
         error={errors.tel}
-        onChange={onChange}
+        formName={appFormNames.formCertificate}
         className={styles.field}
         tabIndex={2}
       />
@@ -75,7 +77,7 @@ const FormCertificate: FC = (): ReactElement => {
       <Field
         type="email"
         name="email"
-        value={values.email}
+        value={values.email?.value || ''}
         error={errors.email}
         required
         onChange={onChange}
