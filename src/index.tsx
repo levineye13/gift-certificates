@@ -9,7 +9,7 @@ import 'normalize.css';
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/gift-certificates">
       <Provider store={store}>
         <App />
       </Provider>
