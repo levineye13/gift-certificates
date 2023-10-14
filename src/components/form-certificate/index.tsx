@@ -1,18 +1,20 @@
-import React, { FC, ReactElement } from 'react';
+import React, { FC, ReactElement, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import Form from '../form';
 import Field from '../form-field';
 import FieldPhone from '../form-field-phone';
 import Area from '../form-area';
 import { useForm } from '../../hooks/useForm';
-import { appFormNames } from '../../utils/constants';
+import { Pages, appFormNames } from '../../utils/constants';
 import styles from './index.module.scss';
 import { useDispatch, useSelector } from '../../store/hooks';
 import { saveCertificate } from '../../store/action/certificate';
 
 const FormCertificate: FC = (): ReactElement => {
   const dispatch = useDispatch();
-  const { current } = useSelector((state) => state.certificate);
+  const navigate = useNavigate();
+  const { current, success } = useSelector((state) => state.certificate);
 
   const { values, errors, onChange, checkValidity } = useForm({
     formName: appFormNames.formCertificate,
@@ -36,6 +38,12 @@ const FormCertificate: FC = (): ReactElement => {
       );
     }
   };
+
+  useEffect(() => {
+    if (success === true) {
+      navigate(Pages.payment, { replace: true });
+    }
+  }, [navigate, success]);
 
   return (
     <Form

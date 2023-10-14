@@ -5,6 +5,9 @@ import {
   SET_CERTIFICATES,
   SET_CERTIFICATE_NUMBER,
   SET_SELECT_CERTIFICATE,
+  SET_FAILED,
+  SET_REQUEST,
+  SET_SUCCESS,
 } from '../action-types/certificate';
 import { AppDispatch, TAppThunk } from '../types';
 
@@ -29,10 +32,25 @@ interface ISetCertificateNumber {
   };
 }
 
+interface ISetRequest {
+  readonly type: typeof SET_REQUEST;
+}
+
+interface ISetSuccess {
+  readonly type: typeof SET_SUCCESS;
+}
+
+interface ISetFailed {
+  readonly type: typeof SET_FAILED;
+}
+
 export type TCertificateActions =
   | ISetCertificates
   | ISetSelectCertificate
-  | ISetCertificateNumber;
+  | ISetCertificateNumber
+  | ISetRequest
+  | ISetSuccess
+  | ISetFailed;
 
 export const setCertificates = (
   certificates: ICertificate[]
@@ -61,6 +79,18 @@ export const setCertificateNumber = ({
   payload: {
     certNumber,
   },
+});
+
+export const setRequest = (): ISetRequest => ({
+  type: SET_REQUEST,
+});
+
+export const setSucces = (): ISetSuccess => ({
+  type: SET_SUCCESS,
+});
+
+export const setFailed = (): ISetFailed => ({
+  type: SET_FAILED,
 });
 
 export const fetchCertificates: TAppThunk =
@@ -94,6 +124,8 @@ export const saveCertificate: TAppThunk =
     email,
   }: ICertificate & { clientname: string; phone: string; email: string }) =>
   async (dispatch: AppDispatch) => {
+    dispatch(setRequest());
+
     try {
       const res = await api.saveCertificate({
         id,
@@ -112,8 +144,12 @@ export const saveCertificate: TAppThunk =
         dispatch(
           setCertificateNumber({ certNumber: lowerObjResponce.certnumber })
         );
+        dispatch(setSucces());
+      } else {
+        dispatch(setFailed());
       }
     } catch (e) {
       console.error(e);
+      setFailed();
     }
   };
