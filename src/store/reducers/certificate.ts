@@ -1,4 +1,6 @@
 import {
+  CLEAR_CERTIFICATE_NUMBER,
+  CLEAR_SELECT_CERTIFICATE,
   SET_CERTIFICATES,
   SET_CERTIFICATE_NUMBER,
   SET_FAILED,
@@ -50,6 +52,24 @@ export const certificateReducer = (
       return {
         ...state,
         certNumber: action.payload.certNumber,
+      };
+
+    case CLEAR_SELECT_CERTIFICATE:
+      return {
+        ...state,
+        current: null,
+        success: false,
+        failed: false,
+        request: false,
+      };
+
+    case CLEAR_CERTIFICATE_NUMBER:
+      return {
+        ...state,
+        certNumber: null,
+        success: false,
+        failed: false,
+        request: false,
       };
 
     case SET_REQUEST:

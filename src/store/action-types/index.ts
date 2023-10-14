@@ -6,4 +6,6 @@ export {
   SET_REQUEST,
   SET_SUCCESS,
   SET_FAILED,
+  CLEAR_CERTIFICATE_NUMBER,
+  CLEAR_SELECT_CERTIFICATE,
 } from './certificate';

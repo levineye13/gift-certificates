@@ -8,6 +8,8 @@ import {
   SET_FAILED,
   SET_REQUEST,
   SET_SUCCESS,
+  CLEAR_CERTIFICATE_NUMBER,
+  CLEAR_SELECT_CERTIFICATE,
 } from '../action-types/certificate';
 import { AppDispatch, TAppThunk } from '../types';
 
@@ -44,13 +46,23 @@ interface ISetFailed {
   readonly type: typeof SET_FAILED;
 }
 
+interface IClearSelectCertificate {
+  readonly type: typeof CLEAR_SELECT_CERTIFICATE;
+}
+
+interface IClearCertificateNumber {
+  readonly type: typeof CLEAR_CERTIFICATE_NUMBER;
+}
+
 export type TCertificateActions =
   | ISetCertificates
   | ISetSelectCertificate
   | ISetCertificateNumber
   | ISetRequest
   | ISetSuccess
-  | ISetFailed;
+  | ISetFailed
+  | IClearCertificateNumber
+  | IClearSelectCertificate;
 
 export const setCertificates = (
   certificates: ICertificate[]
@@ -91,6 +103,14 @@ export const setSucces = (): ISetSuccess => ({
 
 export const setFailed = (): ISetFailed => ({
   type: SET_FAILED,
+});
+
+export const clearSelectCertificate = (): IClearSelectCertificate => ({
+  type: CLEAR_SELECT_CERTIFICATE,
+});
+
+export const clearCertificateNumber = (): IClearCertificateNumber => ({
+  type: CLEAR_CERTIFICATE_NUMBER,
 });
 
 export const fetchCertificates: TAppThunk =
