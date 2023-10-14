@@ -72,6 +72,7 @@ const FormFieldPhone: FC<IField> = ({
       tabIndex={tabIndex}
       inputRef={inputRef}
       placeholder={phoneInputMask}
+      inputMode="tel"
     >
       Телефон
     </Field>

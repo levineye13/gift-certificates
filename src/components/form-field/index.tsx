@@ -14,6 +14,7 @@ interface IField {
   readonly required?: boolean;
   readonly tabIndex?: number;
   readonly inputRef?: React.RefObject<HTMLInputElement>;
+  readonly inputMode?: React.HTMLAttributes<HTMLInputElement>['inputMode'];
 }
 
 const FormField: FC<IField> = ({
@@ -28,6 +29,7 @@ const FormField: FC<IField> = ({
   placeholder,
   tabIndex,
   inputRef,
+  inputMode,
 }): ReactElement => {
   return (
     <label className={`${styles.label} ${className || ''}`}>
@@ -44,6 +46,7 @@ const FormField: FC<IField> = ({
         ref={inputRef}
         placeholder={placeholder}
         tabIndex={tabIndex}
+        inputMode={inputMode}
       />
       <span className={styles.error}>{error}</span>
     </label>
