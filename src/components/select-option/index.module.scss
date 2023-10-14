@@ -24,5 +24,9 @@
     .radio {
       display: none;
     }
+
+    @media screen and (max-width: 480px) {
+      padding: 8px 12px;
+    }
   }
 }
