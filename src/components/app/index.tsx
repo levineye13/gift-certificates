@@ -1,7 +1,41 @@
-import React from 'react';
+import React, { FC, ReactElement, useEffect } from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-const App = () => {
-  return <div></div>;
+import Background from '../background';
+import SelectSertificate from '../../pages/select-certificate';
+import Contacts from '../../pages/contacts';
+import styles from './index.module.scss';
+import { useDispatch } from '../../store/hooks';
+import { fetchCertificates } from '../../store/action';
+import { Pages } from '../../utils/constants';
+
+const App: FC = (): ReactElement => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchCertificates());
+  });
+
+  return (
+    <div className={styles.app}>
+      <Background />
+      <Routes>
+        <Route
+          path={Pages.root}
+          element={
+            <SelectSertificate className={styles['app_select-certificate']} />
+          }
+        />
+        <Route
+          path={Pages.contacts}
+          element={<Contacts className={styles.app_contacts} />}
+        />
+        <Route
+          path={Pages.payment}
+          element={<Contacts className={styles.app_contacts} />}
+        />
+      </Routes>
+    </div>
+  );
 };
 
 export default App;
