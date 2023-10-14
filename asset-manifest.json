@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/gift-certificates/static/css/main.0065d801.css",
+    "main.js": "/gift-certificates/static/js/main.6e4c5f7f.js",
+    "static/media/background.jpg": "/gift-certificates/static/media/background.adf8d7ee509570c8a177.jpg",
+    "index.html": "/gift-certificates/index.html",
+    "main.0065d801.css.map": "/gift-certificates/static/css/main.0065d801.css.map",
+    "main.6e4c5f7f.js.map": "/gift-certificates/static/js/main.6e4c5f7f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0065d801.css",
+    "static/js/main.6e4c5f7f.js"
+  ]
+}
