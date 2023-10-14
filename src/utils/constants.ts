@@ -14,3 +14,10 @@ export enum HttpMethods {
   patch = 'PATCH',
   delete = 'DELETE',
 }
+
+export const enum Pages {
+  root = '/',
+  certificates = 'certificates',
+  contacts = 'contacts',
+  payment = 'payment',
+}
