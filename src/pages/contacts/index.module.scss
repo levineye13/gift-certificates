@@ -9,12 +9,26 @@
   justify-content: space-between;
   align-items: flex-end;
 
+  @media screen and (max-width: 720px) {
+    align-items: center;
+  }
+
   .div {
     display: flex;
     flex-direction: row;
+    margin-top: 30px;
+
+    @media screen and (max-width: 480px) {
+      flex-direction: column;
+    }
   }
 
   &_button {
     margin-left: 20px;
+
+    @media screen and (max-width: 480px) {
+      margin-left: 0;
+      margin-top: 10px;
+    }
   }
 }

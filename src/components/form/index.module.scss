@@ -1,8 +1,10 @@
 @import '../../styles/index.scss';
 
 .form {
+  box-sizing: border-box;
   font-family: $system-fonts;
   max-width: 400px;
+  min-width: 280px;
   width: 100%;
   padding: 10px;
   border-radius: 10px;
@@ -20,6 +22,10 @@
       @include font(20px, 500, normal, 120%);
       text-align: center;
       color: $light-color;
+
+      @media screen and (max-width: 480px) {
+        font-size: 18px;
+      }
     }
   }
 }
