@@ -1,0 +1,41 @@
+@import '../../styles/index.scss';
+
+.section {
+  font-family: $system-fonts;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .content {
+    padding: 40px;
+    background-color: rgba($color: $purple-color, $alpha: 0.9);
+    border-radius: $border-radius;
+  }
+
+  .title {
+    @extend %reset-indent;
+    @include font(24px, 700, normal, 120%);
+    color: $light-color;
+    margin-bottom: 20px;
+  }
+
+  .link {
+    display: block;
+    font-family: $system-fonts;
+    color: $light-color;
+    outline: 0;
+    text-decoration: none;
+    border-bottom: 1px solid $light-color;
+    margin: 0 auto;
+    max-width: max-content;
+    transition: color $animation-duration ease-in-out,
+      border-color $animation-duration ease-in-out;
+
+    &:hover {
+      color: $link-color;
+      border-color: $link-color;
+    }
+  }
+}
