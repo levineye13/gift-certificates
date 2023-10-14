@@ -8,7 +8,9 @@ const useForm = ({ formName }: { formName: TAppForms }) => {
   const dispatch = useDispatch();
   const form = useSelector((state) => state.form[formName]);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { currentTarget } = e;
 
     if (form) {

@@ -32,6 +32,7 @@ class Api {
     clientname,
     phone,
     email,
+    msg,
   }: {
     id: number;
     tablename: string;
@@ -41,11 +42,12 @@ class Api {
     clientname: string;
     phone: string;
     email: string;
+    msg: string;
   }): Promise<TApiResponce<Array<{ certnumber: string }>>> {
     const res: Response = await fetch(
       `${this.url}?MethodName=OSSale&ApiKey=${
         config.apiKey
-      }&Id=${id}&TableName=${tablename}&PrimaryKey=${primarykey}&Price=${price}&Summa=${summa}&ClientName=${clientname}&Phone=${phone}&Email=${email}&PaymentTypeId=${2}&UseDelivery=${0}`,
+      }&Id=${id}&TableName=${tablename}&PrimaryKey=${primarykey}&Price=${price}&Summa=${summa}&ClientName=${clientname}&Phone=${phone}&Email=${email}&PaymentTypeId=${2}&UseDelivery=${0}&MsgText=${msg}`,
       {
         method: HttpMethods.post,
         headers: {

@@ -34,6 +34,7 @@ const FormCertificate: FC = (): ReactElement => {
           clientname: values.fio.value,
           phone: values.tel.value,
           email: values.email.value,
+          msg: values.msg?.value || '',
         })
       );
     }
@@ -73,10 +74,11 @@ const FormCertificate: FC = (): ReactElement => {
         tabIndex={2}
       />
       <Area
-        name="message"
-        value=""
-        error=""
+        name="msg"
+        value={values.msg?.value || ''}
+        error={errors.msg}
         placeholder="Введите сообщение"
+        onChange={onChange}
         className={styles.field}
         tabIndex={3}
       >

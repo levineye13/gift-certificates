@@ -142,7 +142,13 @@ export const saveCertificate: TAppThunk =
     clientname,
     phone,
     email,
-  }: ICertificate & { clientname: string; phone: string; email: string }) =>
+    msg,
+  }: ICertificate & {
+    clientname: string;
+    phone: string;
+    email: string;
+    msg: string;
+  }) =>
   async (dispatch: AppDispatch) => {
     dispatch(setRequest());
 
@@ -156,6 +162,7 @@ export const saveCertificate: TAppThunk =
         clientname,
         phone,
         email,
+        msg,
       });
 
       if (res && res.result === 0) {

@@ -4,9 +4,10 @@ import styles from './index.module.scss';
 
 interface IArea {
   readonly children: string;
-  readonly value: string;
+  readonly value: string | number;
   readonly error: string;
   readonly name: string;
+  readonly onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   readonly className?: string;
   readonly required?: boolean;
   readonly placeholder?: string;
@@ -16,6 +17,7 @@ interface IArea {
 const FormArea: FC<IArea> = ({
   children,
   value,
+  onChange,
   error,
   name,
   className,
@@ -32,6 +34,7 @@ const FormArea: FC<IArea> = ({
         name={name}
         required={required}
         value={value}
+        onChange={onChange}
         placeholder={placeholder}
         tabIndex={tabIndex}
       />
