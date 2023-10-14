@@ -3,6 +3,7 @@ import { ICertificate } from '../../utils/interfaces';
 import { convertObjectKeys } from '../../utils/utils';
 import {
   SET_CERTIFICATES,
+  SET_CERTIFICATE_NUMBER,
   SET_SELECT_CERTIFICATE,
 } from '../action-types/certificate';
 import { AppDispatch, TAppThunk } from '../types';
@@ -21,7 +22,17 @@ interface ISetSelectCertificate {
   };
 }
 
-export type TCertificateActions = ISetCertificates | ISetSelectCertificate;
+interface ISetCertificateNumber {
+  readonly type: typeof SET_CERTIFICATE_NUMBER;
+  readonly payload: {
+    certNumber: string;
+  };
+}
+
+export type TCertificateActions =
+  | ISetCertificates
+  | ISetSelectCertificate
+  | ISetCertificateNumber;
 
 export const setCertificates = (
   certificates: ICertificate[]
@@ -38,6 +49,17 @@ export const setSelectCertificate = (
   type: SET_SELECT_CERTIFICATE,
   payload: {
     certificate,
+  },
+});
+
+export const setCertificateNumber = ({
+  certNumber,
+}: {
+  certNumber: string;
+}): ISetCertificateNumber => ({
+  type: SET_CERTIFICATE_NUMBER,
+  payload: {
+    certNumber,
   },
 });
 
@@ -85,7 +107,11 @@ export const saveCertificate: TAppThunk =
       });
 
       if (res && res.result === 0) {
-        console.log(res);
+        const lowerObjResponce = convertObjectKeys(res.data[0], 'lower');
+
+        dispatch(
+          setCertificateNumber({ certNumber: lowerObjResponce.certnumber })
+        );
       }
     } catch (e) {
       console.error(e);

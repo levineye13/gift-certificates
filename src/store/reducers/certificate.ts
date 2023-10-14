@@ -1,5 +1,6 @@
 import {
   SET_CERTIFICATES,
+  SET_CERTIFICATE_NUMBER,
   SET_SELECT_CERTIFICATE,
 } from '../action-types/certificate';
 import { ICertificate } from '../../utils/interfaces';
@@ -8,11 +9,13 @@ import { TCertificateActions } from '../action/certificate';
 type TCertificateState = {
   list: ICertificate[];
   current: ICertificate | null;
+  certNumber: string | null;
 };
 
 const initialState: TCertificateState = {
   list: [],
   current: null,
+  certNumber: null,
 };
 
 export const certificateReducer = (
@@ -32,6 +35,12 @@ export const certificateReducer = (
       return {
         ...state,
         current: action.payload.certificate,
+      };
+
+    case SET_CERTIFICATE_NUMBER:
+      return {
+        ...state,
+        certNumber: action.payload.certNumber,
       };
 
     default:

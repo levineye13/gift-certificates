@@ -41,7 +41,7 @@ class Api {
     clientname: string;
     phone: string;
     email: string;
-  }): Promise<TApiResponce<{ certNumber: string }>> {
+  }): Promise<TApiResponce<Array<{ certnumber: string }>>> {
     const res: Response = await fetch(
       `${this.url}?MethodName=OSSale&ApiKey=${
         config.apiKey
@@ -55,7 +55,7 @@ class Api {
       }
     );
 
-    const data: TApiResponce<{ certNumber: string }> = await res.json();
+    const data: TApiResponce<Array<{ certnumber: string }>> = await res.json();
 
     return data;
   }
