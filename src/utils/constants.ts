@@ -17,7 +17,7 @@ export enum HttpMethods {
 
 export const enum Pages {
   root = '/',
-  certificates = 'certificates',
-  contacts = 'contacts',
-  payment = 'payment',
+  certificates = '/certificates',
+  contacts = '/contacts',
+  payment = '/payment',
 }
