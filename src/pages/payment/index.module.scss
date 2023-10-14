@@ -3,6 +3,7 @@
 .section {
   font-family: $system-fonts;
   min-height: 100vh;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -12,6 +13,14 @@
     padding: 40px;
     background-color: rgba($color: $purple-color, $alpha: 0.9);
     border-radius: $border-radius;
+
+    @media screen and (max-width: 480px) {
+      padding: 20px;
+    }
+
+    @media screen and (max-width: 320px) {
+      padding: 10px;
+    }
   }
 
   .title {
@@ -19,6 +28,11 @@
     @include font(24px, 700, normal, 120%);
     color: $light-color;
     margin-bottom: 20px;
+    text-align: center;
+
+    @media screen and (max-width: 480px) {
+      font-size: 20px;
+    }
   }
 
   .link {
