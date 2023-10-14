@@ -38,6 +38,14 @@
     &::placeholder {
       color: rgba($light-color, 0.8);
     }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: $dark-color;
+      -webkit-box-shadow: 0 0 2px 2px $purple-color inset;
+      box-shadow: 0 0 3px 2px $purple-color inset;
+    }
   }
 
   .error {
