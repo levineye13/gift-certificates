@@ -19,7 +19,11 @@ const Form: FC<IForm> = ({
 }): ReactElement => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    onSubmit(e);
+    const isValid = e.currentTarget.checkValidity();
+
+    if (isValid) {
+      onSubmit(e);
+    }
   };
 
   return (
