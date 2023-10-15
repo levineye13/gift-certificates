@@ -1,4 +1,5 @@
 import { api } from '../../utils/api';
+import { appFormNames } from '../../utils/constants';
 import { ICertificate } from '../../utils/interfaces';
 import { convertObjectKeys } from '../../utils/utils';
 import {
@@ -12,6 +13,7 @@ import {
   CLEAR_SELECT_CERTIFICATE,
 } from '../action-types/certificate';
 import { AppDispatch, TAppThunk } from '../types';
+import { clearForm } from './form';
 
 interface ISetCertificates {
   readonly type: typeof SET_CERTIFICATES;
@@ -172,6 +174,8 @@ export const saveCertificate: TAppThunk =
           setCertificateNumber({ certNumber: lowerObjResponce.certnumber })
         );
         dispatch(setSucces());
+        dispatch(clearSelectCertificate());
+        dispatch(clearForm({ form: appFormNames.formCertificate }));
       } else {
         dispatch(setFailed());
       }

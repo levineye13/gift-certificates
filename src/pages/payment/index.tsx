@@ -4,10 +4,7 @@ import styles from './index.module.scss';
 import { Link, Navigate } from 'react-router-dom';
 import { Pages } from '../../utils/constants';
 import { useDispatch, useSelector } from '../../store/hooks';
-import {
-  clearCertificateNumber,
-  clearSelectCertificate,
-} from '../../store/action/certificate';
+import { clearCertificateNumber } from '../../store/action/certificate';
 
 const Payment: FC = (): ReactElement => {
   const dispatch = useDispatch();
@@ -17,8 +14,7 @@ const Payment: FC = (): ReactElement => {
     return <Navigate to={Pages.root} replace />;
   }
 
-  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>): void => {
-    dispatch(clearSelectCertificate());
+  const handleClick = (): void => {
     dispatch(clearCertificateNumber());
   };
 
