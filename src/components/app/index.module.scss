@@ -8,5 +8,10 @@
   &_contacts {
     flex-grow: 1;
     margin: auto 0;
+
+    @media screen and (max-width: 720px) {
+      flex-grow: 0;
+      margin: 70px 0 auto;
+    }
   }
 }

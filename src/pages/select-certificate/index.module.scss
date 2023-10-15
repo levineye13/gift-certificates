@@ -1,9 +1,10 @@
 @import '../../styles/index.scss';
 
 .section {
+  box-sizing: border-box;
   font-family: $system-fonts;
   max-height: 700px;
-  min-height: 300px;
+  min-height: 320px;
   padding: 10px;
   display: flex;
   flex-direction: column;

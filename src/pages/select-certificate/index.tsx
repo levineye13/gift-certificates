@@ -28,7 +28,9 @@ const SelectCertificate: FC<ISelectCertificate> = ({
         <div className={styles.div}>
           <p className={styles.price}>
             Цена&nbsp;-&nbsp;
-            <span className={styles.span}>{current.summa.split('.')[0]}</span>
+            <span className={styles.span}>{`${
+              current.summa.split('.')[0]
+            } р.`}</span>
           </p>
           <Button type="button" name="price" onClick={handleButtonClick}>
             Купить
