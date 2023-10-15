@@ -1,14 +1,21 @@
-import React, { ChangeEvent, FC, ReactElement } from 'react';
+import React, { ChangeEvent, FC, ReactElement, useEffect } from 'react';
 
 import Option from '../select-option';
 import styles from './index.module.scss';
 import { useDispatch, useSelector } from '../../store/hooks';
-import { setSelectCertificate } from '../../store/action/certificate';
+import {
+  fetchCertificates,
+  setSelectCertificate,
+} from '../../store/action/certificate';
 import { ICertificate } from '../../utils/interfaces';
 
 const SelectCertificate: FC = (): ReactElement => {
   const dispatch = useDispatch();
   const { list, current } = useSelector((state) => state.certificate);
+
+  useEffect(() => {
+    dispatch(fetchCertificates());
+  }, [dispatch]);
 
   const handleChange =
     (certificate: ICertificate) =>
