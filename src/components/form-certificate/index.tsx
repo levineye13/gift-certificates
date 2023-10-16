@@ -16,29 +16,26 @@ const FormCertificate: FC = (): ReactElement => {
   const navigate = useNavigate();
   const { current, success } = useSelector((state) => state.certificate);
 
-  const { values, errors, onChange, checkValidity } = useForm({
+  const { values, errors, onChange, onSubmit } = useForm({
     formName: appFormNames.formCertificate,
+    submitCallback() {
+      if (current) {
+        dispatch(
+          saveCertificate({
+            id: current.id,
+            tablename: current.tablename,
+            primarykey: current.primarykey,
+            price: current.price,
+            summa: current.summa,
+            clientname: values.fio.value,
+            phone: values.tel.value,
+            email: values.email.value,
+            msg: values.msg?.value || '',
+          })
+        );
+      }
+    },
   });
-
-  const handleSubmit = () => {
-    const isValid = checkValidity();
-
-    if (current && isValid) {
-      dispatch(
-        saveCertificate({
-          id: current.id,
-          tablename: current.tablename,
-          primarykey: current.primarykey,
-          price: current.price,
-          summa: current.summa,
-          clientname: values.fio.value,
-          phone: values.tel.value,
-          email: values.email.value,
-          msg: values.msg?.value || '',
-        })
-      );
-    }
-  };
 
   useEffect(() => {
     if (success === true) {
@@ -50,7 +47,7 @@ const FormCertificate: FC = (): ReactElement => {
     <Form
       name={appFormNames.formCertificate}
       title={current?.name || ''}
-      onSubmit={handleSubmit}
+      onSubmit={onSubmit}
       id={appFormNames.formCertificate}
     >
       <Field
