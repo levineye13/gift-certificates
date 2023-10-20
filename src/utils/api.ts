@@ -7,16 +7,14 @@ class Api {
   constructor(private url: string) {}
 
   public async getCertificates(): Promise<TApiResponce<ICertificate[]>> {
-    const res: Response = await fetch(
-      `${this.url}?MethodName=OSGetGoodList&ismob=0&ApiKey=${config.apiKey}`,
-      {
-        method: HttpMethods.get,
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const params = new URLSearchParams({
+      MethodName: 'OSGetGoodList',
+      ApiKey: config.apiKey || '',
+    });
+
+    const res: Response = await fetch(`${this.url}?${params}`, {
+      method: HttpMethods.get,
+    });
 
     const data: TApiResponce<ICertificate[]> = await res.json();
 
@@ -44,18 +42,27 @@ class Api {
     email: string;
     msg: string;
   }): Promise<TApiResponce<Array<{ certnumber: string }>>> {
-    const res: Response = await fetch(
-      `${this.url}?MethodName=OSSale&ApiKey=${
-        config.apiKey
-      }&Id=${id}&TableName=${tablename}&PrimaryKey=${primarykey}&Price=${price}&Summa=${summa}&ClientName=${clientname}&Phone=${phone}&Email=${email}&PaymentTypeId=${2}&UseDelivery=${0}&MsgText=${msg}`,
-      {
-        method: HttpMethods.post,
-        headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
-        },
-      }
-    );
+    const res: Response = await fetch(this.url, {
+      method: HttpMethods.post,
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        MethodName: 'OSSale',
+        ApiKey: config.apiKey || '',
+        Id: `${id}`,
+        TableName: tablename,
+        PrimaryKey: primarykey,
+        Price: price,
+        Summa: summa,
+        ClientName: clientname,
+        Phone: phone,
+        Email: email,
+        PaymentTypeId: '2',
+        UseDelivery: '0',
+        MsgText: msg,
+      }),
+    });
 
     const data: TApiResponce<Array<{ certnumber: string }>> = await res.json();
 
