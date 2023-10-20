@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/gift-certificates/static/css/main.85219a75.css",
-    "main.js": "/gift-certificates/static/js/main.82d9d6ae.js",
+    "main.js": "/gift-certificates/static/js/main.23a06083.js",
     "static/media/background.jpg": "/gift-certificates/static/media/background.adf8d7ee509570c8a177.jpg",
     "index.html": "/gift-certificates/index.html",
     "main.85219a75.css.map": "/gift-certificates/static/css/main.85219a75.css.map",
-    "main.82d9d6ae.js.map": "/gift-certificates/static/js/main.82d9d6ae.js.map"
+    "main.23a06083.js.map": "/gift-certificates/static/js/main.23a06083.js.map"
   },
   "entrypoints": [
     "static/css/main.85219a75.css",
-    "static/js/main.82d9d6ae.js"
+    "static/js/main.23a06083.js"
   ]
 }
