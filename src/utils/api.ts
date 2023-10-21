@@ -4,7 +4,41 @@ import { ICertificate } from './interfaces';
 import { TApiResponce } from './types';
 
 class Api {
-  constructor(private url: string) {}
+  constructor(private url: string, private onProgress?: () => void) {}
+
+  private async getJsonWithProgress<T>(res: Response): Promise<T> {
+    const reader = res.body!.getReader();
+    let receivedLength = 0;
+    let chunks = [];
+
+    while (true) {
+      const { done, value } = await reader.read();
+
+      if (done) {
+        break;
+      }
+
+      chunks.push(value);
+      receivedLength += value.length;
+
+      if (typeof this.onProgress === 'function') {
+        this.onProgress();
+      }
+    }
+
+    let chunksAll = new Uint8Array(receivedLength);
+    let position = 0;
+
+    for (const chunk of chunks) {
+      chunksAll.set(chunk, position);
+      position += chunk.length;
+    }
+
+    const result = new TextDecoder('utf-8').decode(chunksAll);
+    const json: T = JSON.parse(result);
+
+    return json;
+  }
 
   public async getCertificates(): Promise<TApiResponce<ICertificate[]>> {
     const params = new URLSearchParams({
@@ -16,7 +50,9 @@ class Api {
       method: HttpMethods.get,
     });
 
-    const data: TApiResponce<ICertificate[]> = await res.json();
+    const data: TApiResponce<ICertificate[]> = await this.getJsonWithProgress<
+      TApiResponce<ICertificate[]>
+    >(res);
 
     return data;
   }
@@ -64,7 +100,10 @@ class Api {
       }),
     });
 
-    const data: TApiResponce<Array<{ certnumber: string }>> = await res.json();
+    const data: TApiResponce<Array<{ certnumber: string }>> =
+      await this.getJsonWithProgress<
+        TApiResponce<Array<{ certnumber: string }>>
+      >(res);
 
     return data;
   }
